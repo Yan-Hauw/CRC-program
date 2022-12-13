@@ -1,0 +1,221 @@
+
+
+1010101101010101010101010101010
+
+
+
+-c
+
+generator
+10001000010100001
+
+
+output: correct bitstring with attached CRC 
+
+10101011010101010101010101010100001100101101000
+
+
+0000000000000000 (16 bits)
+
+case 1:
+
+input: 100000000000000000000000000000000000000000000
+input with zeroes inserted: 1000000000000000000000000000000000000000000000000000000000000
+16 zeroes stuffed
+CRC: 1000110111
+
+Verified correct using excel calculation
+
+
+case 2:
+
+input: 11
+input with zeroes inserted: 110000000000000000
+16 zeroes stuffed
+CRC: 11000111100011
+
+Verified correct using excel calculation
+
+
+
+
+-v
+
+generator
+10001000010100001
+
+Simply doing mod2 division here and checking the remainder
+Remainder is always length 1 less than generator
+
+case 1:
+
+input: 10001000010100001, 1000100001010000100000, 100010000101000010000000000000000000
+Remainder: 0000000000000000 in all 3 cases
+Passed
+
+Verified correct using intuition
+
+
+input: 11, 11000101, 1100010111000011 (16 bits long), 11000101110000110 (17 bits, same length as generator)
+Remainder: 11, 11000101, 1100010111000011 (16 bits long), 11000101110000110 (17 bits, same length as generator)
+Passed
+
+Verified correct using intuition
+
+
+case 3:
+
+input: 100010000101000010000000000000000000000000001 (45 bits)
+Remainder: 
+Passed
+
+Verified correct using intuition
+
+
+case 4:
+
+input: 100010000101000010000000010000000000100000001 (45 bits)
+Remainder: 
+Passed
+
+Verified correct using excel
+
+
+
+
+
+-f
+
+generator
+11001000000000101
+
+Approach 
+Step 1. Using same approach in part 1 (-c) Compute the CRC and append the CRC to the message to create the extended message containing the CRC
+Step 2. Only after step 1 is done, then find all possible combinations of 4-bit errors by flipping bits in 4 different positions from the extended message (Message + CRC) created in step 1
+
+division case 1:
+
+input: 100000000000000000000000000000000000000000000
+input with zeroes inserted: 1000000000000000000000000000000000000000000000000000000000000
+16 zeroes stuffed
+CRC: 
+
+Division Not yet verified
+
+
+division case 2:
+
+input: 11
+input with zeroes inserted: 110000000000000000
+16 zeroes stuffed
+CRC: 0010000000000010
+
+Division Verified correct using online calculation
+
+
+
+Combination generator case 1:
+
+generator: 11
+
+message: 1111
+message + crc: 11110
+All 5 possibilities divisible
+
+
+Combination generator case 2:
+
+generator: 110
+
+message: 111
+message + crc: 11110
+Only 0000 divisible
+
+
+Combination generator case 3:
+
+generator: 110
+
+message: 1111
+message + crc: 111100
+Only 000000, 000110, 001010, 010010, 100010 divisble. Other 10/15 possibilities not divisible
+
+
+Combination generator case 4 (provided by TA):
+
+generator: 1010101101010101010101010101010
+input message: 1010101101010101010101010101010
+Message + Crc: 10101011010101010101010101010101001101101111010
+Only outputs 5 combinations:
+1.00101011010101000101010101010101001111101101010
+2.11101011010101011101010101010101001100101110010
+3.10001011010101010001010101010101001101001111110
+4.10111011010101010111010101010101001101111111000
+5.10100011010101010100010101010101001101100111011
+Passed
+
+
+
+
+
+-t
+
+generator
+11001000000000101
+
+Approach 
+Step 1. Using same approach in part 1 (-c) Compute the CRC and append the CRC to the message to create the extended message containing the CRC
+Step 2. Only after step 1 is done, then find all possible combinations of 5-bit errors by flipping bits in 5 different positions from the extended message (Message + CRC) created in step 1
+
+
+
+Combination generator case 1 (provided by TA):
+
+generator: 1010101101010101010101010101010
+input message: 1010101011010
+message + CRC : 10101010110100010101011101001
+Number of combinations in output: 13
+Actual combinations:
+01100010110100111101011101001
+11001110110100000001011101001
+10011000110100011111011101001
+10110011110100010000011101001
+10100110010100010111111101001
+10101100100100010100001101001
+10101001111100010101110101001
+10101011010000010101001001001
+10101010000110010101010111001
+10101010101101010101011000001
+10101010111000110101011111101
+10101010110010000101011100011
+10101010110111011101011101100
+Passed
+
+
+
+
+-p
+
+generator
+11000000000000101
+
+Approach 
+Step 1. Using same approach in part 1 (-c) Compute the CRC and append the CRC to the message to create the extended message containing the CRC
+Step 2. Only after step 1 is done, then find all possible combinations of 5-bit errors by flipping bits in 5 different positions from the extended message (Message + CRC) created in step 1
+
+
+
+Combination generator case 1 (provided by TA):
+
+generator: 1010101101010101010101010101010
+input message: 1010101011010
+message + CRC : 10101010110101111111111011111
+Number of combinations in output: 0
+Actual combinations: 
+None
+
+
+
+
+
+
